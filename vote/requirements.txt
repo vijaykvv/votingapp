@@ -1,0 +1,8 @@
+Flask
+Redis
+gunicorn
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-flask
+opentelemetry-instrumentation-redis
+opentelemetry-exporter-otlp

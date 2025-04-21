@@ -14,8 +14,10 @@ spec:
       labels:
         app: vote
     spec:
+      imagePullSecrets:
+        - name: imagesecret
       containers:
-      - image: dockersamples/examplevotingapp_vote
+      - image: vijaykvv/votingapp:v1.0
         name: vote
         ports:
         - containerPort: 80

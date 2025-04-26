@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
         - name: imagesecret
       containers:
-      - image: vijaykvv/votingapp:v1.0-worker
+      - image: vijaykvv/votingapp_worker:latest
         name: worker
         resources:
           requests:

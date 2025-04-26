@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
         - name: imagesecret
       containers:
-      - image: vijaykvv/votingapp:v1.0-result
+      - image: vijaykvv/votingapp_result:latest
         name: result
         ports:
         - containerPort: 80

@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: voteapp-ingress
+  namespace: voting
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-http
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - kudavoting.duckdns.org
+    - kudaresult.duckdns.org
+    secretName: voteapp-tls
+  rules:
+  - host: kudavoting.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vote
+            port:
+              number: 8080
+  - host: kudaresult.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: result
+            port:
+              number: 8081

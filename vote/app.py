@@ -6,31 +6,11 @@ import random
 import json
 import logging
 
-# OpenTelemetry imports
-from opentelemetry import trace
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.instrumentation.redis import RedisInstrumentor
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-
-# Initialize OpenTelemetry
-trace.set_tracer_provider(TracerProvider())
-tracer = trace.get_tracer(__name__)
-
-# Configure the OTLP exporter
-otlp_exporter = OTLPSpanExporter(endpoint="http://otel-collector.monitoring.svc.cluster.local:4317", insecure=True)
-span_processor = BatchSpanProcessor(otlp_exporter)  
-trace.get_tracer_provider().add_span_processor(span_processor)
-
-# Instrument Flask and Redis
-app = Flask(__name__)
-FlaskInstrumentor().instrument_app(app)
-RedisInstrumentor().instrument()
-
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 hostname = socket.gethostname()
+
+app = Flask(__name__)
 
 gunicorn_error_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers.extend(gunicorn_error_logger.handlers)
@@ -69,4 +49,3 @@ def hello():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
-    #noted

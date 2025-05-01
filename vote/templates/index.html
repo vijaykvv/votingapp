@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -42,81 +42,6 @@
         $(".b").prop('disabled', true);
         $(".b").html('{{option_b}} <i class="fa fa-check-circle"></i>');
         $(".a").css('opacity','0.5');
-      }
-    </script>
-    {% endif %}
-  </body>
-</html> -->
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>{{option_a}} vs {{option_b}}!</title>
-    <base href="/index.html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="docker-compose, docker, stack">
-    <meta name="author" content="Tutum dev team">
-    <link rel='stylesheet' href="{{ url_for('static',filename='stylesheets/style.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  </head>
-  <body>
-    <div id="content-container">
-      <div id="content-container-center">
-        <h3>{{option_a}} vs {{option_b}}!</h3>
-        <form id="choice" name="form" method="POST" action="/">
-          <button id="a" type="submit" name="vote" class="a" value="a">{{option_a}}</button>
-          <button id="b" type="submit" name="vote" class="b" value="b">{{option_b}}</button>
-        </form>
-        <div id="tip">
-          (Tip: you can change your vote, added content)
-        </div>
-        <div id="hostname">
-          Processed by container ID {{hostname}}
-        </div>
-      </div>
-    </div>
-    <script>
-      document.getElementById('choice').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const formData = new FormData(event.target); // Collect form data
-        const vote = formData.get('vote'); // Get the vote value
-
-        fetch('/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: new URLSearchParams({ vote: vote }), // Encode the data
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Failed to submit vote');
-            }
-            return response.text();
-          })
-          .then((message) => {
-            alert(message); // Notify the user that the vote was counted
-          })
-          .catch((error) => {
-            alert('Error: ' + error.message); // Show an error message
-          });
-      });
-    </script>
-    {% if vote %}
-    <script>
-      var vote = "{{vote}}";
-
-      if (vote == "a") {
-        document.querySelector(".a").disabled = true;
-        document.querySelector(".a").innerHTML = '{{option_a}} <i class="fa fa-check-circle"></i>';
-        document.querySelector(".b").style.opacity = '0.5';
-      }
-      if (vote == "b") {
-        document.querySelector(".b").disabled = true;
-        document.querySelector(".b").innerHTML = '{{option_b}} <i class="fa fa-check-circle"></i>';
-        document.querySelector(".a").style.opacity = '0.5';
       }
     </script>
     {% endif %}

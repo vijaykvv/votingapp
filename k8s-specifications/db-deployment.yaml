@@ -5,10 +5,15 @@ metadata:
     app: db
   name: db  
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: db
+  strategy:
+    type: RollingUpdate
+    RollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   template:
     metadata:
       labels:

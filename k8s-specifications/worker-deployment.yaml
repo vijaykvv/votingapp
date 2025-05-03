@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: worker
+  strategy:
+    type: RollingUpdate
+    RollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   template:
     metadata:
       labels:

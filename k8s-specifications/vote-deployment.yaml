@@ -18,12 +18,16 @@ spec:
     metadata:
       labels:
         app: vote
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        kubernetes.io/change-cause: "Redeploy to pull latest image" 
     spec:
       imagePullSecrets:
         - name: imagesecret
       containers:
       - image: vijaykvv/votingapp_vote:latest  
         name: vote
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: vote

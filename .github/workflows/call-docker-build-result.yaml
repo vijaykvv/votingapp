@@ -72,10 +72,6 @@ jobs:
       ### build stage to target, defaults to empty, which builds to last stage in Dockerfile
       # target:
       
-      ### Add a build arg to invalidate cache - this ensures the COPY . . command always executes
-      build-args: |
-        CACHEBUST=${{ github.run_id }}
-      
       ### platforms to build for, defaults to linux/amd64
       ### other options: linux/amd64,linux/arm64,linux/arm/v7
       platforms: linux/amd64,linux/arm64,linux/arm/v7

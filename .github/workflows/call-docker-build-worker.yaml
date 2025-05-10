@@ -58,6 +58,8 @@ jobs:
       ### defaults to:
       tag-rules: |
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value=latest-${{ github.run_id }}-${{ github.run_number }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value=${{ github.sha }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
         type=ref,event=pr
       
       ### path to where docker should copy files into image
@@ -72,10 +74,38 @@ jobs:
       
       ### platforms to build for, defaults to linux/amd64
       ### other options: linux/amd64,linux/arm64,linux/arm/v7
-      # FIXME worker arm/v7 support doesn't build in .net core 3.1 with QEMU
-      # a fix would likely run the .net build on amd64 but with a target of arm/v7
       platforms: linux/amd64,linux/arm64,linux/arm/v7
       
       ### Create a PR comment with image tags and labels
       ### defaults to false
       # comment-enable: false
+
+  update-manifests:
+    needs: call-docker-build
+    runs-on: ubuntu-latest
+    # Only run on main branch pushes, not PRs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Generate timestamp tag
+        id: generate-tag
+        run: echo "IMAGE_TAG=latest-${{ github.run_id }}-${{ github.run_number }}" >> $GITHUB_OUTPUT
+      
+      - name: Update Kubernetes manifests
+        run: |
+          # Update the image tag in the Kubernetes manifest
+          sed -i "s|vijaykvv/votingapp_worker:latest|vijaykvv/votingapp_worker:${{ steps.generate-tag.outputs.IMAGE_TAG }}|g" votingapp/k8s-specifications/worker-deployment.yaml
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add votingapp/k8s-specifications/worker-deployment.yaml
+          git commit -m "Update worker image to ${{ steps.generate-tag.outputs.IMAGE_TAG }}"
+          git push

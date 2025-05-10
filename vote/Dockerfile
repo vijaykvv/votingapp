@@ -22,10 +22,17 @@ CMD ["python", "app.py"]
 # final defines the stage that will bundle the application for production
 FROM base AS final
 
+# Extra aggressive cache busting approach
+RUN echo "Cache buster: $(date)" > /tmp/date.txt
+RUN echo "Random: $RANDOM" >> /tmp/date.txt
+
 # Copy HTML/UI files first to a separate location
 COPY ./templates/index.html /tmp/index.html
 # Force a refresh every build by adding a comment with current date
-RUN date > /tmp/builddate && cat /tmp/builddate >> /tmp/index.html && mkdir -p /usr/local/app/templates/ && cp /tmp/index.html /usr/local/app/templates/
+RUN date '+%Y-%m-%d %H:%M:%S' > /tmp/builddate && \
+    echo "<!-- Cache busted at: $(cat /tmp/builddate) -->" >> /tmp/index.html && \
+    mkdir -p /usr/local/app/templates/ && \
+    cp /tmp/index.html /usr/local/app/templates/
 
 # Copy our code from the current folder to the working directory inside the container
 COPY . .

@@ -6,10 +6,12 @@ import random
 import json
 import logging
 
-# Updated on May 10, 2023 at 10:01 PM - Cache busting test
+# Updated on May 10, 2023 at 10:05 PM - WITH SUPER AGGRESSIVE CACHE BUSTING
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 hostname = socket.gethostname()
+# Add version info
+version = "v3.2 - SUPER AGGRESSIVE CACHE BUSTING - " + str(random.randint(1000, 9999))
 
 app = Flask(__name__)
 
@@ -41,7 +43,7 @@ def hello():
         'index.html',
         option_a=option_a,
         option_b=option_b,
-        hostname=hostname,
+        hostname=hostname + " - " + version,
         vote=vote,
     ))
     resp.set_cookie('voter_id', voter_id)

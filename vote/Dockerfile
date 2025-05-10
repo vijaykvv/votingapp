@@ -1,10 +1,11 @@
 # base defines a base stage that uses the official python runtime base image
 FROM python:3.11-slim AS base
 
-# Add curl for healthcheck
+# Add curl for healthcheck and generate a timestamp at build time
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    echo "Build timestamp: $(date)" > /build-timestamp.txt
 
 # Set the application directory
 WORKDIR /usr/local/app
@@ -13,29 +14,27 @@ WORKDIR /usr/local/app
 COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# dev defines a stage for development, where it'll watch for filesystem changes
-FROM base AS dev
-RUN pip install watchdog
-ENV FLASK_ENV=development
-CMD ["python", "app.py"]
+# Create a new stage with a timestamp argument to bust cache
+FROM base AS builder
+ARG CACHE_DATE=1
+RUN echo "Cache busting timestamp: ${CACHE_DATE} - $(date)" > /tmp/cache-date.txt
 
-# final defines the stage that will bundle the application for production
+# Copy all files individually to ensure they get updated
+COPY ./templates /usr/local/app/templates
+COPY ./static /usr/local/app/static
+COPY ./app.py /usr/local/app/app.py
+
+# Add version info based on build timestamp
+RUN echo "Version: $(date)" >> /usr/local/app/version.txt
+
+# Final image
 FROM base AS final
 
-# Extra aggressive cache busting approach
-RUN echo "Cache buster: $(date)" > /tmp/date.txt
-RUN echo "Random: $RANDOM" >> /tmp/date.txt
+# Copy everything from the builder stage
+COPY --from=builder /usr/local/app /usr/local/app
 
-# Copy HTML/UI files first to a separate location
-COPY ./templates/index.html /tmp/index.html
-# Force a refresh every build by adding a comment with current date
-RUN date '+%Y-%m-%d %H:%M:%S' > /tmp/builddate && \
-    echo "<!-- Cache busted at: $(cat /tmp/builddate) -->" >> /tmp/index.html && \
-    mkdir -p /usr/local/app/templates/ && \
-    cp /tmp/index.html /usr/local/app/templates/
-
-# Copy our code from the current folder to the working directory inside the container
-COPY . .
+# Copy the timestamp file to keep track of build time
+COPY --from=builder /tmp/cache-date.txt /usr/local/app/cache-date.txt
 
 # Make port 80 available for links and/or publish
 EXPOSE 80

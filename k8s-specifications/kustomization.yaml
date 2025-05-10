@@ -13,6 +13,4 @@ resources:
   - vote-deployment.yaml
   - vote-service.yaml
   - worker-deployment.yaml
-  - app-ingress.yaml
   - netshoot.yaml
-  - sslcert.yaml 

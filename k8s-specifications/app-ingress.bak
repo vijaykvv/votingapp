@@ -1,3 +1,6 @@
+# This file has been temporarily disabled due to nginx ingress controller issues
+# To re-enable, remove this comment and rename the file back to app-ingress.yaml
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

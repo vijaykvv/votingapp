@@ -4,6 +4,9 @@ metadata:
   labels:
     app: worker
   name: worker
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: vijaykvv/votingapp_worker
+    argocd-image-updater.argoproj.io/vijaykvv/votingapp_worker.update-strategy: latest
 spec:
   replicas: 1
   selector:

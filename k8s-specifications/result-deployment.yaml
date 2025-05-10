@@ -4,6 +4,9 @@ metadata:
   labels:
     app: result
   name: result
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: vijaykvv/votingapp_result
+    argocd-image-updater.argoproj.io/vijaykvv/votingapp_result.update-strategy: latest
 spec:
   replicas: 2
   selector:

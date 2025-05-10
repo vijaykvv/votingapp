@@ -60,7 +60,7 @@ jobs:
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
         type=raw,value=before,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
         type=raw,value=after,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
-        type=schedule,pattern={{date 'YYYYMMDD-HHmmss'}},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value=v1.0.0-${{ github.run_number }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
         type=ref,event=pr
       
       ### path to where docker should copy files into image

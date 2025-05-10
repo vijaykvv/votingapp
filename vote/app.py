@@ -6,6 +6,7 @@ import random
 import json
 import logging
 
+# Updated on May 10, 2023 at 10:01 PM - Cache busting test
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 hostname = socket.gethostname()

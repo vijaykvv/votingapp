@@ -4,10 +4,6 @@ metadata:
   labels:
     app: result
   name: result
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: vijaykvv/votingapp_result
-    argocd-image-updater.argoproj.io/vijaykvv_votingapp_result.update-strategy: digest
-    kubernetes.io/change-cause: "Image updated from commit: ${GIT_COMMIT_SHA}"
 spec:
   replicas: 2
   selector:
@@ -24,7 +20,7 @@ spec:
         app: result
       annotations:
         argocd.argoproj.io/sync-wave: "0"
-        kubernetes.io/change-cause: "Image updated to digest: {{image.vijaykvv/votingapp_result.digest}}"
+        kubernetes.io/change-cause: "Redeploy to pull latest image"
     spec:
       imagePullSecrets:
         - name: imagesecret

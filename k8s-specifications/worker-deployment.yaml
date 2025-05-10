@@ -4,9 +4,6 @@ metadata:
   labels:
     app: worker
   name: worker
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: vijaykvv/votingapp_worker
-    argocd-image-updater.argoproj.io/vijaykvv_votingapp_worker.update-strategy: digest
 spec:
   replicas: 1
   selector:
@@ -23,7 +20,7 @@ spec:
         app: worker
       annotations:
         argocd.argoproj.io/sync-wave: "0"
-        kubernetes.io/change-cause: "Image updated to digest: {{image.vijaykvv/votingapp_worker.digest}}"
+        kubernetes.io/change-cause: "Redeploy to pull latest image"
     spec:
       imagePullSecrets:
         - name: imagesecret

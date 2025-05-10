@@ -111,7 +111,10 @@ jobs:
       
       - name: Update Kubernetes manifests
         run: |
-          # Update the image tag in the Kubernetes manifest
+          # First reset any previous tags to latest
+          sed -i "s|vijaykvv/votingapp_result:latest-.*|vijaykvv/votingapp_result:latest|g" k8s-specifications/result-deployment.yaml
+          
+          # Then update to the new tag
           sed -i "s|vijaykvv/votingapp_result:latest|vijaykvv/votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}|g" k8s-specifications/result-deployment.yaml
           
       - name: Commit and push changes

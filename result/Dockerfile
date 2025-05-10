@@ -16,6 +16,10 @@ RUN npm ci && \
  npm cache clean --force && \
  mv /usr/local/app/node_modules /node_modules
 
+# Add cache busting argument
+ARG CACHEBUST=1
+RUN echo "Cache bust: $CACHEBUST"
+
 COPY . .
 
 ENV PORT=80

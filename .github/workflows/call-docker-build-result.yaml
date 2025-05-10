@@ -92,6 +92,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Generate timestamp tag
         id: generate-tag
@@ -107,5 +110,9 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add k8s-specifications/result-deployment.yaml
+          
+          # Pull any changes that might have happened while we were updating
+          git pull --rebase origin main
+          
           git commit -m "Update result image to ${{ steps.generate-tag.outputs.IMAGE_TAG }}"
           git push

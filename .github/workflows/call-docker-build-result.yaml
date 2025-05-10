@@ -100,12 +100,12 @@ jobs:
       - name: Update Kubernetes manifests
         run: |
           # Update the image tag in the Kubernetes manifest
-          sed -i "s|vijaykvv/votingapp_result:latest|vijaykvv/votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}|g" votingapp/k8s-specifications/result-deployment.yaml
+          sed -i "s|vijaykvv/votingapp_result:latest|vijaykvv/votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}|g" k8s-specifications/result-deployment.yaml
           
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add votingapp/k8s-specifications/result-deployment.yaml
+          git add k8s-specifications/result-deployment.yaml
           git commit -m "Update result image to ${{ steps.generate-tag.outputs.IMAGE_TAG }}"
           git push

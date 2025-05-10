@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - db-deployment.yaml
+  - db-secrets.yaml
+  - db-service.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - result-deployment.yaml
+  - result-service.yaml
+  - secrets.yaml
+  - vote-deployment.yaml
+  - vote-service.yaml
+  - worker-deployment.yaml
+  - app-ingress.yaml
+  - netshoot.yaml
+  - sslcert.yaml 

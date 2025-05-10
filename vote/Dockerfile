@@ -22,6 +22,11 @@ CMD ["python", "app.py"]
 # final defines the stage that will bundle the application for production
 FROM base AS final
 
+# Copy HTML/UI files first to a separate location
+COPY ./templates/index.html /tmp/index.html
+# Force a refresh every build by adding a comment with current date
+RUN date > /tmp/builddate && cat /tmp/builddate >> /tmp/index.html && mkdir -p /usr/local/app/templates/ && cp /tmp/index.html /usr/local/app/templates/
+
 # Copy our code from the current folder to the working directory inside the container
 COPY . .
 

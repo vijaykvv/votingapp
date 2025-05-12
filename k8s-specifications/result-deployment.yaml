@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: result
+      severity: critical
   strategy:
     type: RollingUpdate
     RollingUpdate:

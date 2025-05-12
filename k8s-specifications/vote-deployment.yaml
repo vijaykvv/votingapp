@@ -19,6 +19,7 @@ spec:
     metadata:
       labels:
         app: vote
+        severity: critical
       annotations:
         argocd.argoproj.io/sync-wave: "0"
         kubernetes.io/change-cause: "Redeploy to pull latest image" 
@@ -38,4 +39,4 @@ spec:
             memory: "128Mi"
           limits:
             cpu: "200m"
-            memory: "256Mi"  
+            memory: "256Mi"

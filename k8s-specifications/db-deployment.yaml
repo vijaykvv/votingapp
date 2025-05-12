@@ -19,6 +19,7 @@ spec:
     metadata:
       labels:
         app: db
+        severity: critical
     spec:
       containers:
       - image: postgres:15-alpine
@@ -49,4 +50,4 @@ spec:
           name: db-data
       volumes:
       - name: db-data
-        emptyDir: {} 
+        emptyDir: {}

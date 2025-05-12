@@ -19,6 +19,7 @@ spec:
     metadata:
       labels:
         app: result
+        severity: critical
       annotations:
         argocd.argoproj.io/sync-wave: "0"
         kubernetes.io/change-cause: "Redeploy to pull latest image"

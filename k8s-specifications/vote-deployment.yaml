@@ -10,7 +10,6 @@ spec:
     matchLabels:
       app: vote
       severity: critical
-      apptype: frontend
   strategy:
     type: RollingUpdate
     RollingUpdate:
@@ -21,7 +20,6 @@ spec:
       labels:
         app: vote
         severity: critical
-        apptype: frontend
       annotations:
         argocd.argoproj.io/sync-wave: "0"
         kubernetes.io/change-cause: "Redeploy to pull latest image" 

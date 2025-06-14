@@ -10,7 +10,6 @@ spec:
     matchLabels:
       app: result
       severity: critical
-      apptype: backend
   strategy:
     type: RollingUpdate
     RollingUpdate:
@@ -21,7 +20,6 @@ spec:
       labels:
         app: result
         severity: critical
-        apptype: backend
       annotations:
         argocd.argoproj.io/sync-wave: "0"
         kubernetes.io/change-cause: "Redeploy to pull latest image"

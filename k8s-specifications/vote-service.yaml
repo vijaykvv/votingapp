@@ -6,6 +6,7 @@ metadata:
   name: vote
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
   - name: "vote-service"
     port: 8080

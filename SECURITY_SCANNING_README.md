@@ -30,10 +30,12 @@ All workflows now trigger on both `main` and `sbom` branches for:
 - Creates CycloneDX-JSON format SBOMs
 - Catalogs all packages and dependencies in images
 
-### VEXctl
-- Vulnerability Exchange (VEX) document creator
-- Creates OpenVEX format documents
-- Provides vulnerability status information
+### VEXctl & Proper VEX Generation
+- Vulnerability Exchange (VEX) document creator using OpenVEX format
+- **Generates real VEX documents based on Grype scan results**
+- Processes actual CVE identifiers found in vulnerability scans
+- Assigns meaningful status (not_affected, under_investigation) based on severity
+- Includes proper justifications and impact statements
 
 ### Cosign
 - Image signing and attestation tool
@@ -49,9 +51,16 @@ Stored in `Image-SBOM-Details/` directory:
 - `{imagename}-{tag}-sbom.cyclonedx.json` - CycloneDX JSON format
 - `{imagename}-{tag}-sbom.txt` - Human readable table format
 
-### VEX Files  
+### VEX Files (Proper Format)
 Stored in `VEX-Image-Details/` directory:
-- `{imagename}-{tag}-vex.json` - OpenVEX JSON format
+- `{imagename}-{tag}-vex.json` - **OpenVEX JSON format with real CVE data**
+
+**Features:**
+- ✅ **Real CVE identifiers** from Grype scan results  
+- ✅ **Severity-based status assignments** (CRITICAL/HIGH → under_investigation)
+- ✅ **Proper justifications** (vulnerability_disputed, code_not_reachable, etc.)
+- ✅ **Component mapping** to affected subcomponents
+- ✅ **Impact statements** with vulnerability descriptions
 
 ### Vulnerability Reports
 Stored in `grype-reports/` directory (✅ **Now committed to repository**):

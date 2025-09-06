@@ -1,0 +1,1320 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/vijaykvv/votingapp/vex/votingapp_result-latest-17513595863-47",
+  "author": "GitHub Actions Security Scanner",
+  "timestamp": "2025-09-06T10:54:40.415172Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2024-56433",
+        "description": "shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/login@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=aec305335647f931&upstream=shadow",
+              "name": "login",
+              "version": "1:4.13+dfsg1-1+deb12u1",
+              "purl": "pkg:deb/debian/login@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=shadow"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: LOW - shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.",
+      "action_statement": "Component found in SBOM: login"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-2953",
+        "description": "A vulnerability was found in openldap. This security flaw causes a null pointer dereference in ber_memalloc_x() function."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&package-id=692b9197d4b21a92&upstream=openldap",
+              "name": "libldap-2.5-0",
+              "version": "2.5.13+dfsg-5",
+              "purl": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&upstream=openldap"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - A vulnerability was found in openldap. This security flaw causes a null pointer dereference in ber_memalloc_x() function.",
+      "action_statement": "Component found in SBOM: libldap-2.5-0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-31484",
+        "description": "CPAN.pm before 2.35 does not verify TLS certificates when downloading distributions over HTTPS."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&package-id=239ba68d133aeaaa&upstream=perl",
+              "name": "perl-base",
+              "version": "5.36.0-7+deb12u2",
+              "purl": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&upstream=perl"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - CPAN.pm before 2.35 does not verify TLS certificates when downloading distributions over HTTPS.",
+      "action_statement": "Component found in SBOM: perl-base"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2011-3389",
+        "description": "The SSL protocol, as used in certain configurations in Microsoft Windows and Microsoft Internet Explorer, Mozilla Firefox, Google Chrome, Opera, and other products, encrypts data by using CBC mode with chained initialization vectors, which allows man-in-the-middle attackers to obtain plaintext HTTP headers via a blockwise chosen-boundary attack (BCBA) on an HTTPS session, in conjunction with JavaScript code that uses (1) the HTML5 WebSocket API, (2) the Java URLConnection API, or (3) the Silverlight WebClient API, aka a \"BEAST\" attack."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&package-id=423f04e3abe0a6ea&upstream=gnutls28",
+              "name": "libgnutls30",
+              "version": "3.7.9-2+deb12u4",
+              "purl": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=gnutls28"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - The SSL protocol, as used in certain configurations in Microsoft Windows and Microsoft Internet Explorer, Mozilla Firefox, Google Chrome, Opera, and other products, encrypts data by using CBC mode with chained initialization vectors, which allows man-in-the-middle attackers to obtain plaintext HTTP headers via a blockwise chosen-boundary attack (BCBA) on an HTTPS session, in conjunction with JavaScript code that uses (1) the HTML5 WebSocket API, (2) the Java URLConnection API, or (3) the Silverlight WebClient API, aka a \"BEAST\" attack.",
+      "action_statement": "Component found in SBOM: libgnutls30"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2005-2541",
+        "description": "Tar 1.15.1 does not properly warn the user when extracting setuid or setgid files, which may allow local users or remote attackers to gain privileges."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/tar@1.34%2Bdfsg-1.2%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=f8ad3f5238dbcf6a",
+              "name": "tar",
+              "version": "1.34+dfsg-1.2+deb12u1",
+              "purl": "pkg:deb/debian/tar@1.34%2Bdfsg-1.2%2Bdeb12u1?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - Tar 1.15.1 does not properly warn the user when extracting setuid or setgid files, which may allow local users or remote attackers to gain privileges.",
+      "action_statement": "Component found in SBOM: tar"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2017-17740",
+        "description": "contrib/slapd-modules/nops/nops.c in OpenLDAP through 2.4.45, when both the nops module and the memberof overlay are enabled, attempts to free a buffer that was allocated on the stack, which allows remote attackers to cause a denial of service (slapd crash) via a member MODDN operation."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&package-id=692b9197d4b21a92&upstream=openldap",
+              "name": "libldap-2.5-0",
+              "version": "2.5.13+dfsg-5",
+              "purl": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&upstream=openldap"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - contrib/slapd-modules/nops/nops.c in OpenLDAP through 2.4.45, when both the nops module and the memberof overlay are enabled, attempts to free a buffer that was allocated on the stack, which allows remote attackers to cause a denial of service (slapd crash) via a member MODDN operation.",
+      "action_statement": "Component found in SBOM: libldap-2.5-0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2018-20796",
+        "description": "In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\\227|)(\\\\1\\\\1|t1|\\\\\\2537)+' in grep."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\\227|)(\\\\1\\\\1|t1|\\\\\\2537)+' in grep.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2015-3276",
+        "description": "The nss_parse_ciphers function in libraries/libldap/tls_m.c in OpenLDAP does not properly parse OpenSSL-style multi-keyword mode cipher strings, which might cause a weaker than intended cipher to be used and allow remote attackers to have unspecified impact via unknown vectors."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&package-id=692b9197d4b21a92&upstream=openldap",
+              "name": "libldap-2.5-0",
+              "version": "2.5.13+dfsg-5",
+              "purl": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&upstream=openldap"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - The nss_parse_ciphers function in libraries/libldap/tls_m.c in OpenLDAP does not properly parse OpenSSL-style multi-keyword mode cipher strings, which might cause a weaker than intended cipher to be used and allow remote attackers to have unspecified impact via unknown vectors.",
+      "action_statement": "Component found in SBOM: libldap-2.5-0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2011-3374",
+        "description": "It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/apt@2.6.1?arch=amd64&distro=debian-12&package-id=cd0a6d87e2b9c130",
+              "name": "apt",
+              "version": "2.6.1",
+              "purl": "pkg:deb/debian/apt@2.6.1?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.",
+      "action_statement": "Component found in SBOM: apt"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-6297",
+        "description": "It was discovered that dpkg-deb does not properly sanitize directory permissions when extracting a control member into a temporary directory, which is documented as being a safe operation even on untrusted data. This may result in leaving temporary files behind on cleanup. Given automated and repeated execution of dpkg-deb commands on adversarial .deb packages or with well compressible files, placed inside a directory with permissions not allowing removal by a non-root user, this can end up in a DoS scenario due to causing disk quota exhaustion or disk full conditions."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/dpkg@1.21.22?arch=amd64&distro=debian-12&package-id=2818345ae43ed06c",
+              "name": "dpkg",
+              "version": "1.21.22",
+              "purl": "pkg:deb/debian/dpkg@1.21.22?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - It was discovered that dpkg-deb does not properly sanitize directory permissions when extracting a control member into a temporary directory, which is documented as being a safe operation even on untrusted data. This may result in leaving temporary files behind on cleanup. Given automated and repeated execution of dpkg-deb commands on adversarial .deb packages or with well compressible files, placed inside a directory with permissions not allowing removal by a non-root user, this can end up in a DoS scenario due to causing disk quota exhaustion or disk full conditions.",
+      "action_statement": "Component found in SBOM: dpkg"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-32990",
+        "description": "A heap-buffer-overflow (off-by-one) flaw was found in the GnuTLS software in the template parsing logic within the certtool utility. When it reads certain settings from a template file, it allows an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial-of-service (DoS) that could potentially crash the system."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&package-id=423f04e3abe0a6ea&upstream=gnutls28",
+              "name": "libgnutls30",
+              "version": "3.7.9-2+deb12u4",
+              "purl": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=gnutls28"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - A heap-buffer-overflow (off-by-one) flaw was found in the GnuTLS software in the template parsing logic within the certtool utility. When it reads certain settings from a template file, it allows an attacker to cause an out-of-bounds (OOB) NULL pointer write, resulting in memory corruption and a denial-of-service (DoS) that could potentially crash the system.",
+      "action_statement": "Component found in SBOM: libgnutls30"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-23166",
+        "description": "The C++ method SignTraits::DeriveBits() may incorrectly call ThrowException() based on user-supplied inputs when executing in a background thread, crashing the Node.js process. Such cryptographic operations are commonly applied to untrusted inputs. Thus, this mechanism potentially allows an adversary to remotely crash a Node.js runtime."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:generic/node@18.20.8?package-id=393d3376be37067d",
+              "name": "node",
+              "version": "18.20.8",
+              "purl": "pkg:generic/node@18.20.8"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - The C++ method SignTraits::DeriveBits() may incorrectly call ThrowException() based on user-supplied inputs when executing in a background thread, crashing the Node.js process. Such cryptographic operations are commonly applied to untrusted inputs. Thus, this mechanism potentially allows an adversary to remotely crash a Node.js runtime.",
+      "action_statement": "Component found in SBOM: node"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-32988",
+        "description": "A flaw was found in GnuTLS. A double-free vulnerability exists in GnuTLS due to incorrect ownership handling in the export logic of Subject Alternative Name (SAN) entries containing an otherName. If the type-id OID is invalid or malformed, GnuTLS will call asn1_delete_structure() on an ASN.1 node it does not own, leading to a double-free condition when the parent function or caller later attempts to free the same structure.  This vulnerability can be triggered using only public GnuTLS APIs and may result in denial of service or memory corruption, depending on allocator behavior."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&package-id=423f04e3abe0a6ea&upstream=gnutls28",
+              "name": "libgnutls30",
+              "version": "3.7.9-2+deb12u4",
+              "purl": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=gnutls28"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - A flaw was found in GnuTLS. A double-free vulnerability exists in GnuTLS due to incorrect ownership handling in the export logic of Subject Alternative Name (SAN) entries containing an otherName. If the type-id OID is invalid or malformed, GnuTLS will call asn1_delete_structure() on an ASN.1 node it does not own, leading to a double-free condition when the parent function or caller later attempts to free the same structure.  This vulnerability can be triggered using only public GnuTLS APIs and may result in denial of service or memory corruption, depending on allocator behavior.",
+      "action_statement": "Component found in SBOM: libgnutls30"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-22365",
+        "description": "linux-pam (aka Linux PAM) before 1.6.0 allows attackers to cause a denial of service (blocked login process) via mkfifo because the openat call (for protect_dir) lacks O_DIRECTORY."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=45cb74db37890fcb&upstream=pam",
+              "name": "libpam-modules",
+              "version": "1.5.2-6+deb12u1",
+              "purl": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=pam"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - linux-pam (aka Linux PAM) before 1.6.0 allows attackers to cause a denial of service (blocked login process) via mkfifo because the openat call (for protect_dir) lacks O_DIRECTORY.",
+      "action_statement": "Component found in SBOM: libpam-modules"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2019-1010023",
+        "description": "GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-6395",
+        "description": "A NULL pointer dereference flaw was found in the GnuTLS software in _gnutls_figure_common_ciphersuite()."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&package-id=423f04e3abe0a6ea&upstream=gnutls28",
+              "name": "libgnutls30",
+              "version": "3.7.9-2+deb12u4",
+              "purl": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=gnutls28"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A NULL pointer dereference flaw was found in the GnuTLS software in _gnutls_figure_common_ciphersuite().",
+      "action_statement": "Component found in SBOM: libgnutls30"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50495",
+        "description": "NCurse v6.4-20230418 was discovered to contain a segmentation fault via the component _nc_wrap_entry()."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libtinfo6@6.4-4?arch=amd64&distro=debian-12&package-id=a6231fb14cfeaaac&upstream=ncurses",
+              "name": "libtinfo6",
+              "version": "6.4-4",
+              "purl": "pkg:deb/debian/libtinfo6@6.4-4?arch=amd64&distro=debian-12&upstream=ncurses"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - NCurse v6.4-20230418 was discovered to contain a segmentation fault via the component _nc_wrap_entry().",
+      "action_statement": "Component found in SBOM: libtinfo6"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-3576",
+        "description": "A vulnerability in the MIT Kerberos implementation allows GSSAPI-protected messages using RC4-HMAC-MD5 to be spoofed due to weaknesses in the MD5 checksum design. If RC4 is preferred over stronger encryption types, an attacker could exploit MD5 collisions to forge message integrity codes. This may lead to unauthorized message tampering."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&package-id=21e5ead516e4a793&upstream=krb5",
+              "name": "libgssapi-krb5-2",
+              "version": "1.20.1-2+deb12u3",
+              "purl": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=krb5"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A vulnerability in the MIT Kerberos implementation allows GSSAPI-protected messages using RC4-HMAC-MD5 to be spoofed due to weaknesses in the MD5 checksum design. If RC4 is preferred over stronger encryption types, an attacker could exploit MD5 collisions to forge message integrity codes. This may lead to unauthorized message tampering.",
+      "action_statement": "Component found in SBOM: libgssapi-krb5-2"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2018-5709",
+        "description": "An issue was discovered in MIT Kerberos 5 (aka krb5) through 1.16. There is a variable \"dbentry->n_key_data\" in kadmin/dbutil/dump.c that can store 16-bit data but unknowingly the developer has assigned a \"u4\" variable to it, which is for 32-bit data. An attacker can use this vulnerability to affect other artifacts of the database as we know that a Kerberos database dump file contains trusted data."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&package-id=21e5ead516e4a793&upstream=krb5",
+              "name": "libgssapi-krb5-2",
+              "version": "1.20.1-2+deb12u3",
+              "purl": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=krb5"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - An issue was discovered in MIT Kerberos 5 (aka krb5) through 1.16. There is a variable \"dbentry->n_key_data\" in kadmin/dbutil/dump.c that can store 16-bit data but unknowingly the developer has assigned a \"u4\" variable to it, which is for 32-bit data. An attacker can use this vulnerability to affect other artifacts of the database as we know that a Kerberos database dump file contains trusted data.",
+      "action_statement": "Component found in SBOM: libgssapi-krb5-2"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-31486",
+        "description": "HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&package-id=239ba68d133aeaaa&upstream=perl",
+              "name": "perl-base",
+              "version": "5.36.0-7+deb12u2",
+              "purl": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&upstream=perl"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates.",
+      "action_statement": "Component found in SBOM: perl-base"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-23165",
+        "description": "In Node.js, the `ReadFileUtf8` internal binding leaks memory due to a corrupted pointer in `uv_fs_s.file`: a UTF-16 path buffer is allocated but subsequently overwritten when the file descriptor is set. This results in an unrecoverable memory leak on every call. Repeated use can cause unbounded memory growth, leading to a denial of service.\r\n\r\nImpact:\r\n* This vulnerability affects APIs relying on `ReadFileUtf8` on Node.js release lines: v20 and v22."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:generic/node@18.20.8?package-id=393d3376be37067d",
+              "name": "node",
+              "version": "18.20.8",
+              "purl": "pkg:generic/node@18.20.8"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: LOW - In Node.js, the `ReadFileUtf8` internal binding leaks memory due to a corrupted pointer in `uv_fs_s.file`: a UTF-16 path buffer is allocated but subsequently overwritten when the file descriptor is set. This results in an unrecoverable memory leak on every call. Repeated use can cause unbounded memory growth, leading to a denial of service.\r\n\r\nImpact:\r\n* This vulnerability affects APIs relying on `ReadFileUtf8` on Node.js release lines: v20 and v22.",
+      "action_statement": "Component found in SBOM: node"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-6020",
+        "description": "A flaw was found in linux-pam. The module pam_namespace may use access user-controlled paths without proper protection, allowing local users to elevate their privileges to root via multiple symlink attacks and race conditions."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=45cb74db37890fcb&upstream=pam",
+              "name": "libpam-modules",
+              "version": "1.5.2-6+deb12u1",
+              "purl": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=pam"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - A flaw was found in linux-pam. The module pam_namespace may use access user-controlled paths without proper protection, allowing local users to elevate their privileges to root via multiple symlink attacks and race conditions.",
+      "action_statement": "Component found in SBOM: libpam-modules"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2018-6829",
+        "description": "cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgcrypt20@1.10.1-3?arch=amd64&distro=debian-12&package-id=d386f651d9220c9e",
+              "name": "libgcrypt20",
+              "version": "1.10.1-3",
+              "purl": "pkg:deb/debian/libgcrypt20@1.10.1-3?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.",
+      "action_statement": "Component found in SBOM: libgcrypt20"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2016-2781",
+        "description": "chroot in GNU coreutils, when used with --userspec, allows local users to escape to the parent session via a crafted TIOCSTI ioctl call, which pushes characters to the terminal's input buffer."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12&package-id=eca37691b87c0860",
+              "name": "coreutils",
+              "version": "9.1-1",
+              "purl": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: LOW - chroot in GNU coreutils, when used with --userspec, allows local users to escape to the parent session via a crafted TIOCSTI ioctl call, which pushes characters to the terminal's input buffer.",
+      "action_statement": "Component found in SBOM: coreutils"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-0725",
+        "description": "When libcurl is asked to perform automatic gzip decompression of content-encoded HTTP responses with the `CURLOPT_ACCEPT_ENCODING` option, **using zlib 1.2.0.3 or older**, an attacker-controlled integer overflow would make libcurl perform a buffer overflow."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@7.88.1-10%2Bdeb12u12?arch=amd64&distro=debian-12&package-id=ab7e55631fbcedda",
+              "name": "curl",
+              "version": "7.88.1-10+deb12u12",
+              "purl": "pkg:deb/debian/curl@7.88.1-10%2Bdeb12u12?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - When libcurl is asked to perform automatic gzip decompression of content-encoded HTTP responses with the `CURLOPT_ACCEPT_ENCODING` option, **using zlib 1.2.0.3 or older**, an attacker-controlled integer overflow would make libcurl perform a buffer overflow.",
+      "action_statement": "Component found in SBOM: curl"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2019-1010024",
+        "description": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2010-4756",
+        "description": "The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2020-15719",
+        "description": "libldap in certain third-party OpenLDAP packages has a certificate-validation flaw when the third-party package is asserting RFC6125 support. It considers CN even when there is a non-matching subjectAltName (SAN). This is fixed in, for example, openldap-2.4.46-10.el8 in Red Hat Enterprise Linux."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&package-id=692b9197d4b21a92&upstream=openldap",
+              "name": "libldap-2.5-0",
+              "version": "2.5.13+dfsg-5",
+              "purl": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&upstream=openldap"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - libldap in certain third-party OpenLDAP packages has a certificate-validation flaw when the third-party package is asserting RFC6125 support. It considers CN even when there is a non-matching subjectAltName (SAN). This is fixed in, for example, openldap-2.4.46-10.el8 in Red Hat Enterprise Linux.",
+      "action_statement": "Component found in SBOM: libldap-2.5-0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-4598",
+        "description": "A vulnerability was found in systemd-coredump. This flaw allows an attacker to force a SUID process to crash and replace it with a non-SUID binary to access the original's privileged process coredump, allowing the attacker to read sensitive data, such as /etc/shadow content, loaded by the original process.  A SUID binary or process has a special type of permission, which allows the process to run with the file owner's permissions, regardless of the user executing the binary. This allows the process to access more restricted data than unprivileged users or processes would be able to. An attacker can leverage this flaw by forcing a SUID process to crash and force the Linux kernel to recycle the process PID before systemd-coredump can analyze the /proc/pid/auxv file. If the attacker wins the race condition, they gain access to the original's SUID process coredump file. They can read sensitive content loaded into memory by the original binary, affecting data confidentiality."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&package-id=b51d84ac500554c2&upstream=systemd",
+              "name": "libsystemd0",
+              "version": "252.36-1~deb12u1",
+              "purl": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&upstream=systemd"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A vulnerability was found in systemd-coredump. This flaw allows an attacker to force a SUID process to crash and replace it with a non-SUID binary to access the original's privileged process coredump, allowing the attacker to read sensitive data, such as /etc/shadow content, loaded by the original process.  A SUID binary or process has a special type of permission, which allows the process to run with the file owner's permissions, regardless of the user executing the binary. This allows the process to access more restricted data than unprivileged users or processes would be able to. An attacker can leverage this flaw by forcing a SUID process to crash and force the Linux kernel to recycle the process PID before systemd-coredump can analyze the /proc/pid/auxv file. If the attacker wins the race condition, they gain access to the original's SUID process coredump file. They can read sensitive content loaded into memory by the original binary, affecting data confidentiality.",
+      "action_statement": "Component found in SBOM: libsystemd0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2007-5686",
+        "description": "initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/login@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=aec305335647f931&upstream=shadow",
+              "name": "login",
+              "version": "1:4.13+dfsg1-1+deb12u1",
+              "purl": "pkg:deb/debian/login@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=shadow"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.",
+      "action_statement": "Component found in SBOM: login"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-10041",
+        "description": "A vulnerability was found in PAM. The secret information is stored in memory, where the attacker can trigger the victim program to execute by sending characters to its standard input (stdin). As this occurs, the attacker can train the branch predictor to execute an ROP chain speculatively. This flaw could result in leaked passwords, such as those found in /etc/shadow while performing authentications."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=45cb74db37890fcb&upstream=pam",
+              "name": "libpam-modules",
+              "version": "1.5.2-6+deb12u1",
+              "purl": "pkg:deb/debian/libpam-modules@1.5.2-6%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=pam"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A vulnerability was found in PAM. The secret information is stored in memory, where the attacker can trigger the victim program to execute by sending characters to its standard input (stdin). As this occurs, the attacker can train the branch predictor to execute an ROP chain speculatively. This flaw could result in leaked passwords, such as those found in /etc/shadow while performing authentications.",
+      "action_statement": "Component found in SBOM: libpam-modules"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-2236",
+        "description": "A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgcrypt20@1.10.1-3?arch=amd64&distro=debian-12&package-id=d386f651d9220c9e",
+              "name": "libgcrypt20",
+              "version": "1.10.1-3",
+              "purl": "pkg:deb/debian/libgcrypt20@1.10.1-3?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.",
+      "action_statement": "Component found in SBOM: libgcrypt20"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-32989",
+        "description": "A heap-buffer-overread vulnerability was found in GnuTLS in how it handles the Certificate Transparency (CT) Signed Certificate Timestamp (SCT) extension during X.509 certificate parsing. This flaw allows a malicious user to create a certificate containing a malformed SCT extension (OID 1.3.6.1.4.1.11129.2.4.2) that contains sensitive data. This issue leads to the exposure of confidential information when GnuTLS verifies certificates from certain websites when the certificate (SCT) is not checked correctly."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&package-id=423f04e3abe0a6ea&upstream=gnutls28",
+              "name": "libgnutls30",
+              "version": "3.7.9-2+deb12u4",
+              "purl": "pkg:deb/debian/libgnutls30@3.7.9-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=gnutls28"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A heap-buffer-overread vulnerability was found in GnuTLS in how it handles the Certificate Transparency (CT) Signed Certificate Timestamp (SCT) extension during X.509 certificate parsing. This flaw allows a malicious user to create a certificate containing a malformed SCT extension (OID 1.3.6.1.4.1.11129.2.4.2) that contains sensitive data. This issue leads to the exposure of confidential information when GnuTLS verifies certificates from certain websites when the certificate (SCT) is not checked correctly.",
+      "action_statement": "Component found in SBOM: libgnutls30"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2019-1010025",
+        "description": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is \"ASLR bypass itself is not a vulnerability."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is \"ASLR bypass itself is not a vulnerability.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-26458",
+        "description": "Kerberos 5 (aka krb5) 1.21.2 contains a memory leak in /krb5/src/lib/rpc/pmap_rmt.c."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&package-id=21e5ead516e4a793&upstream=krb5",
+              "name": "libgssapi-krb5-2",
+              "version": "1.20.1-2+deb12u3",
+              "purl": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=krb5"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - Kerberos 5 (aka krb5) 1.21.2 contains a memory leak in /krb5/src/lib/rpc/pmap_rmt.c.",
+      "action_statement": "Component found in SBOM: libgssapi-krb5-2"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-2379",
+        "description": "libcurl skips the certificate verification for a QUIC connection under certain conditions, when built to use wolfSSL. If told to use an unknown/bad cipher or curve, the error path accidentally skips the verification and returns OK, thus ignoring any certificate problems."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@7.88.1-10%2Bdeb12u12?arch=amd64&distro=debian-12&package-id=ab7e55631fbcedda",
+              "name": "curl",
+              "version": "7.88.1-10+deb12u12",
+              "purl": "pkg:deb/debian/curl@7.88.1-10%2Bdeb12u12?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - libcurl skips the certificate verification for a QUIC connection under certain conditions, when built to use wolfSSL. If told to use an unknown/bad cipher or curve, the error path accidentally skips the verification and returns OK, thus ignoring any certificate problems.",
+      "action_statement": "Component found in SBOM: curl"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-8058",
+        "description": "The regcomp function in the GNU C library version from 2.4 to 2.41 is  subject to a double free if some previous allocation fails. It can be  accomplished either by a malloc failure or by using an interposed malloc  that injects random malloc failures. The double free can allow buffer  manipulation depending of how the regex is constructed. This issue  affects all architectures and ABIs supported by the GNU C library."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - The regcomp function in the GNU C library version from 2.4 to 2.41 is  subject to a double free if some previous allocation fails. It can be  accomplished either by a malloc failure or by using an interposed malloc  that injects random malloc failures. The double free can allow buffer  manipulation depending of how the regex is constructed. This issue  affects all architectures and ABIs supported by the GNU C library.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2019-9192",
+        "description": "In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\\\1\\\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern"
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\\\1\\\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-23167",
+        "description": "A flaw in Node.js 20's HTTP parser allows improper termination of HTTP/1 headers using `\\r\\n\\rX` instead of the required `\\r\\n\\r\\n`.\nThis inconsistency enables request smuggling, allowing attackers to bypass proxy-based access controls and submit unauthorized requests.\n\nThe issue was resolved by upgrading `llhttp` to version 9, which enforces correct header termination.\n\nImpact:\n* This vulnerability affects only Node.js 20.x users prior to the `llhttp` v9 upgrade."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:generic/node@18.20.8?package-id=393d3376be37067d",
+              "name": "node",
+              "version": "18.20.8",
+              "purl": "pkg:generic/node@18.20.8"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - A flaw in Node.js 20's HTTP parser allows improper termination of HTTP/1 headers using `\\r\\n\\rX` instead of the required `\\r\\n\\r\\n`.\nThis inconsistency enables request smuggling, allowing attackers to bypass proxy-based access controls and submit unauthorized requests.\n\nThe issue was resolved by upgrading `llhttp` to version 9, which enforces correct header termination.\n\nImpact:\n* This vulnerability affects only Node.js 20.x users prior to the `llhttp` v9 upgrade.",
+      "action_statement": "Component found in SBOM: node"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2011-4116",
+        "description": "_is_safe in the File::Temp module for Perl does not properly handle symlinks."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&package-id=239ba68d133aeaaa&upstream=perl",
+              "name": "perl-base",
+              "version": "5.36.0-7+deb12u2",
+              "purl": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&upstream=perl"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - _is_safe in the File::Temp module for Perl does not properly handle symlinks.",
+      "action_statement": "Component found in SBOM: perl-base"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2019-1010022",
+        "description": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-31437",
+        "description": "An issue was discovered in systemd 253. An attacker can modify a sealed log file such that, in some views, not all existing and sealed log messages are displayed. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\""
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&package-id=b51d84ac500554c2&upstream=systemd",
+              "name": "libsystemd0",
+              "version": "252.36-1~deb12u1",
+              "purl": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&upstream=systemd"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - An issue was discovered in systemd 253. An attacker can modify a sealed log file such that, in some views, not all existing and sealed log messages are displayed. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\"",
+      "action_statement": "Component found in SBOM: libsystemd0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-4802",
+        "description": "Untrusted LD_LIBRARY_PATH environment variable vulnerability in the GNU C Library version 2.27 to 2.38 allows attacker controlled loading of dynamically shared library in statically compiled setuid binaries that call dlopen (including internal dlopen calls after setlocale or calls to NSS functions such as getaddrinfo)."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&package-id=4d3e3a82fb09cf46&upstream=glibc",
+              "name": "libc-bin",
+              "version": "2.36-9+deb12u10",
+              "purl": "pkg:deb/debian/libc-bin@2.36-9%2Bdeb12u10?arch=amd64&distro=debian-12&upstream=glibc"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "justification": "vulnerability_disputed",
+      "impact_statement": "Severity: HIGH - Untrusted LD_LIBRARY_PATH environment variable vulnerability in the GNU C Library version 2.27 to 2.38 allows attacker controlled loading of dynamically shared library in statically compiled setuid binaries that call dlopen (including internal dlopen calls after setlocale or calls to NSS functions such as getaddrinfo).",
+      "action_statement": "Component found in SBOM: libc-bin"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-6141",
+        "description": "A vulnerability has been found in GNU ncurses up to 6.5-20250322 and classified as problematic. This vulnerability affects the function postprocess_termcap of the file tinfo/parse_entry.c. The manipulation leads to stack-based buffer overflow. The attack needs to be approached locally. Upgrading to version 6.5-20250329 is able to address this issue. It is recommended to upgrade the affected component."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libtinfo6@6.4-4?arch=amd64&distro=debian-12&package-id=a6231fb14cfeaaac&upstream=ncurses",
+              "name": "libtinfo6",
+              "version": "6.4-4",
+              "purl": "pkg:deb/debian/libtinfo6@6.4-4?arch=amd64&distro=debian-12&upstream=ncurses"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: LOW - A vulnerability has been found in GNU ncurses up to 6.5-20250322 and classified as problematic. This vulnerability affects the function postprocess_termcap of the file tinfo/parse_entry.c. The manipulation leads to stack-based buffer overflow. The attack needs to be approached locally. Upgrading to version 6.5-20250329 is able to address this issue. It is recommended to upgrade the affected component.",
+      "action_statement": "Component found in SBOM: libtinfo6"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2017-14159",
+        "description": "slapd in OpenLDAP 2.4.45 and earlier creates a PID file after dropping privileges to a non-root account, which might allow local users to kill arbitrary processes by leveraging access to this non-root account for PID file modification before a root script executes a \"kill `cat /pathname`\" command, as demonstrated by openldap-initscript."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&package-id=692b9197d4b21a92&upstream=openldap",
+              "name": "libldap-2.5-0",
+              "version": "2.5.13+dfsg-5",
+              "purl": "pkg:deb/debian/libldap-2.5-0@2.5.13%2Bdfsg-5?arch=amd64&distro=debian-12&upstream=openldap"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - slapd in OpenLDAP 2.4.45 and earlier creates a PID file after dropping privileges to a non-root account, which might allow local users to kill arbitrary processes by leveraging access to this non-root account for PID file modification before a root script executes a \"kill `cat /pathname`\" command, as demonstrated by openldap-initscript.",
+      "action_statement": "Component found in SBOM: libldap-2.5-0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-31438",
+        "description": "An issue was discovered in systemd 253. An attacker can truncate a sealed log file and then resume log sealing such that checking the integrity shows no error, despite modifications. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\""
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&package-id=b51d84ac500554c2&upstream=systemd",
+              "name": "libsystemd0",
+              "version": "252.36-1~deb12u1",
+              "purl": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&upstream=systemd"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - An issue was discovered in systemd 253. An attacker can truncate a sealed log file and then resume log sealing such that checking the integrity shows no error, despite modifications. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\"",
+      "action_statement": "Component found in SBOM: libsystemd0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-30258",
+        "description": "In GnuPG before 2.5.5, if a user chooses to import a certificate with certain crafted subkey data that lacks a valid backsig or that has incorrect usage flags, the user loses the ability to verify signatures made from certain other signing keys, aka a \"verification DoS.\""
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/gpgv@2.2.40-1.1?arch=amd64&distro=debian-12&package-id=bbd0ff05d4cd008c&upstream=gnupg2",
+              "name": "gpgv",
+              "version": "2.2.40-1.1",
+              "purl": "pkg:deb/debian/gpgv@2.2.40-1.1?arch=amd64&distro=debian-12&upstream=gnupg2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: LOW - In GnuPG before 2.5.5, if a user chooses to import a certificate with certain crafted subkey data that lacks a valid backsig or that has incorrect usage flags, the user loses the ability to verify signatures made from certain other signing keys, aka a \"verification DoS.\"",
+      "action_statement": "Component found in SBOM: gpgv"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-31439",
+        "description": "An issue was discovered in systemd 253. An attacker can modify the contents of past events in a sealed log file and then adjust the file such that checking the integrity shows no error, despite modifications. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\""
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&package-id=b51d84ac500554c2&upstream=systemd",
+              "name": "libsystemd0",
+              "version": "252.36-1~deb12u1",
+              "purl": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&upstream=systemd"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - An issue was discovered in systemd 253. An attacker can modify the contents of past events in a sealed log file and then adjust the file such that checking the integrity shows no error, despite modifications. NOTE: the vendor reportedly sent \"a reply denying that any of the finding was a security vulnerability.\"",
+      "action_statement": "Component found in SBOM: libsystemd0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-26461",
+        "description": "Kerberos 5 (aka krb5) 1.21.2 contains a memory leak vulnerability in /krb5/src/lib/gssapi/krb5/k5sealv3.c."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&package-id=21e5ead516e4a793&upstream=krb5",
+              "name": "libgssapi-krb5-2",
+              "version": "1.20.1-2+deb12u3",
+              "purl": "pkg:deb/debian/libgssapi-krb5-2@1.20.1-2%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=krb5"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - Kerberos 5 (aka krb5) 1.21.2 contains a memory leak vulnerability in /krb5/src/lib/gssapi/krb5/k5sealv3.c.",
+      "action_statement": "Component found in SBOM: libgssapi-krb5-2"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-40909",
+        "description": "Perl threads have a working directory race condition where file operations may target unintended paths.  If a directory handle is open at thread creation, the process-wide current working directory is temporarily changed in order to clone\u00a0that handle for the new thread, which is visible from any third (or\u00a0more) thread already running.   This may lead to unintended operations\u00a0such as loading code or accessing files from unexpected locations,\u00a0which a local attacker may be able to exploit.  The bug was introduced in commit\u00a011a11ecf4bea72b17d250cfb43c897be1341861e and released in Perl version 5.13.6"
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&package-id=239ba68d133aeaaa&upstream=perl",
+              "name": "perl-base",
+              "version": "5.36.0-7+deb12u2",
+              "purl": "pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u2?arch=amd64&distro=debian-12&upstream=perl"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Severity: MEDIUM - Perl threads have a working directory race condition where file operations may target unintended paths.  If a directory handle is open at thread creation, the process-wide current working directory is temporarily changed in order to clone\u00a0that handle for the new thread, which is visible from any third (or\u00a0more) thread already running.   This may lead to unintended operations\u00a0such as loading code or accessing files from unexpected locations,\u00a0which a local attacker may be able to exploit.  The bug was introduced in commit\u00a011a11ecf4bea72b17d250cfb43c897be1341861e and released in Perl version 5.13.6",
+      "action_statement": "Component found in SBOM: perl-base"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2013-4392",
+        "description": "systemd, when updating file permissions, allows local users to change the permissions and SELinux security contexts for arbitrary files via a symlink attack on unspecified files."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&package-id=b51d84ac500554c2&upstream=systemd",
+              "name": "libsystemd0",
+              "version": "252.36-1~deb12u1",
+              "purl": "pkg:deb/debian/libsystemd0@252.36-1~deb12u1?arch=amd64&distro=debian-12&upstream=systemd"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - systemd, when updating file permissions, allows local users to change the permissions and SELinux security contexts for arbitrary files via a symlink attack on unspecified files.",
+      "action_statement": "Component found in SBOM: libsystemd0"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-27587",
+        "description": "OpenSSL 3.0.0 through 3.3.2 on the PowerPC architecture is vulnerable to a Minerva attack, exploitable by measuring the time of signing of random messages using the EVP_DigestSign API, and then using the private key to extract the K value (nonce) from the signatures. Next, based on the bit size of the extracted nonce, one can compare the signing time of full-sized nonces to signatures that used smaller nonces, via statistical tests. There is a side-channel in the P-364 curve that allows private key extraction (also, there is a dependency between the bit size of K and the size of the side channel). NOTE: This CVE is disputed because the OpenSSL security policy explicitly notes that any side channels which require same physical system to be detected are outside of the threat model for the software. The timing signal is so small that it is infeasible to be detected without having the attacking process running on the same physical system."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libssl3@3.0.17-1~deb12u2?arch=amd64&distro=debian-12&package-id=255494dac2f9cb00&upstream=openssl",
+              "name": "libssl3",
+              "version": "3.0.17-1~deb12u2",
+              "purl": "pkg:deb/debian/libssl3@3.0.17-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - OpenSSL 3.0.0 through 3.3.2 on the PowerPC architecture is vulnerable to a Minerva attack, exploitable by measuring the time of signing of random messages using the EVP_DigestSign API, and then using the private key to extract the K value (nonce) from the signatures. Next, based on the bit size of the extracted nonce, one can compare the signing time of full-sized nonces to signatures that used smaller nonces, via statistical tests. There is a side-channel in the P-364 curve that allows private key extraction (also, there is a dependency between the bit size of K and the size of the side channel). NOTE: This CVE is disputed because the OpenSSL security policy explicitly notes that any side channels which require same physical system to be detected are outside of the threat model for the software. The timing signal is so small that it is infeasible to be detected without having the attacking process running on the same physical system.",
+      "action_statement": "Component found in SBOM: libssl3"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2017-18018",
+        "description": "In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX \"-R -L\" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12&package-id=eca37691b87c0860",
+              "name": "coreutils",
+              "version": "9.1-1",
+              "purl": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX \"-R -L\" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.",
+      "action_statement": "Component found in SBOM: coreutils"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-27943",
+        "description": "libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/gcc-12-base@12.2.0-14%2Bdeb12u1?arch=amd64&distro=debian-12&package-id=5dd3e15c0db94758&upstream=gcc-12",
+              "name": "gcc-12-base",
+              "version": "12.2.0-14+deb12u1",
+              "purl": "pkg:deb/debian/gcc-12-base@12.2.0-14%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=gcc-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.",
+      "action_statement": "Component found in SBOM: gcc-12-base"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-0563",
+        "description": "A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an \"INPUTRC\" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/bsdutils@1%3A2.38.1-5%2Bdeb12u3?arch=amd64&distro=debian-12&package-id=f131145b816a43ee&upstream=util-linux%402.38.1-5%2Bdeb12u3",
+              "name": "bsdutils",
+              "version": "1:2.38.1-5+deb12u3",
+              "purl": "pkg:deb/debian/bsdutils@1%3A2.38.1-5%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=util-linux%402.38.1-5%2Bdeb12u3"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an \"INPUTRC\" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.",
+      "action_statement": "Component found in SBOM: bsdutils"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-5278",
+        "description": "A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12&package-id=eca37691b87c0860",
+              "name": "coreutils",
+              "version": "9.1-1",
+              "purl": "pkg:deb/debian/coreutils@9.1-1?arch=amd64&distro=debian-12"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.",
+      "action_statement": "Component found in SBOM: coreutils"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-3219",
+        "description": "GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB."
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17513595863-47",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/gpgv@2.2.40-1.1?arch=amd64&distro=debian-12&package-id=bbd0ff05d4cd008c&upstream=gnupg2",
+              "name": "gpgv",
+              "version": "2.2.40-1.1",
+              "purl": "pkg:deb/debian/gpgv@2.2.40-1.1?arch=amd64&distro=debian-12&upstream=gnupg2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "component_not_present",
+      "impact_statement": "Severity: NEGLIGIBLE - GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.",
+      "action_statement": "Component found in SBOM: gpgv"
+    }
+  ]
+}

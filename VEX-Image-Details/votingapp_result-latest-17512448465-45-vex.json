@@ -1,0 +1,20 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://example.com/vex/votingapp_result-latest-17512448465-45",
+  "author": "GitHub Actions",
+  "timestamp": "2025-09-06T08:53:45Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "Scan completed for image"
+      },
+      "products": [
+        {
+          "@id": "vijaykvv/votingapp_result:latest-17512448465-45"
+        }
+      ],
+      "status": "under_investigation"
+    }
+  ]
+}

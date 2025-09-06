@@ -7,6 +7,7 @@ import json
 import logging
 
 # Updated on May 10, 2023 at 10:05 PM - WITH SUPER AGGRESSIVE CACHE BUSTING
+# Testing security scanning with CycloneDX SBOM generation - Sep 6, 2024
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 hostname = socket.gethostname()

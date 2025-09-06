@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'sbom'
     # only build when important files change
     paths:
       - 'vote/**'
@@ -13,6 +14,7 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'sbom'
     # only build when important files change
     paths:
       - 'vote/**'
@@ -80,11 +82,135 @@ jobs:
       ### defaults to false
       # comment-enable: false
 
+  security-scan:
+    needs: call-docker-build
+    runs-on: ubuntu-latest
+    # Only run on main and sbom branch pushes, not PRs
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/sbom')
+    
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      attestations: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+      - name: Generate timestamp tag
+        id: generate-tag
+        run: echo "IMAGE_TAG=latest-${{ github.run_id }}-${{ github.run_number }}" >> $GITHUB_OUTPUT
+        
+      - name: Set image name
+        id: image-name
+        run: echo "FULL_IMAGE_NAME=vijaykvv/votingapp_vote:${{ steps.generate-tag.outputs.IMAGE_TAG }}" >> $GITHUB_OUTPUT
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Pull image for scanning
+        run: docker pull ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
+      
+      - name: Install Grype
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+          grype version
+      
+      - name: Install Syft  
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+          syft version
+      
+      - name: Install VEXctl
+        run: |
+          curl -sSfL https://github.com/openvex/vexctl/releases/latest/download/vexctl-linux-amd64 -o /usr/local/bin/vexctl
+          chmod +x /usr/local/bin/vexctl
+          vexctl version
+      
+      - name: Run Grype vulnerability scan
+        run: |
+          mkdir -p grype-reports
+          grype ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o json > grype-reports/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vulnerabilities.json
+          grype ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o table > grype-reports/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vulnerabilities.txt
+      
+      - name: Generate SBOM with Syft
+        run: |
+          mkdir -p Image-SBOM-Details
+          syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o spdx-json > Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.spdx.json
+          syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o table > Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.txt
+      
+      - name: Generate VEX document
+        run: |
+          mkdir -p VEX-Image-Details
+          # Create a basic VEX document structure
+          cat > VEX-Image-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vex.json << EOF
+          {
+            "@context": "https://openvex.dev/ns/v0.2.0",
+            "@id": "https://example.com/vex/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}",
+            "author": "GitHub Actions",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "version": 1,
+            "statements": [
+              {
+                "vulnerability": {
+                  "name": "Scan completed for image"
+                },
+                "products": [
+                  {
+                    "@id": "${{ steps.image-name.outputs.FULL_IMAGE_NAME }}"
+                  }
+                ],
+                "status": "under_investigation"
+              }
+            ]
+          }
+          EOF
+      
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+        with:
+          cosign-release: 'v2.2.4'
+      
+      - name: Attest SBOM to image
+        run: |
+          cosign attest --predicate Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.spdx.json \
+            --type spdxjson \
+            ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
+        env:
+          COSIGN_EXPERIMENTAL: 1
+      
+      - name: Attest VEX to image  
+        run: |
+          cosign attest --predicate VEX-Image-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vex.json \
+            --type vuln \
+            ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
+        env:
+          COSIGN_EXPERIMENTAL: 1
+      
+      - name: Commit and push SBOM and VEX files
+        run: |
+          git pull origin ${{ github.ref_name }}
+          git add Image-SBOM-Details/ VEX-Image-Details/
+          git commit -m "Add SBOM and VEX details for votingapp_vote:${{ steps.generate-tag.outputs.IMAGE_TAG }}" || echo "No changes to commit"
+          git push || (git pull --rebase origin ${{ github.ref_name }} && git push)
+
   update-manifests:
     needs: call-docker-build
     runs-on: ubuntu-latest
-    # Only run on main branch pushes, not PRs
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Only run on main and sbom branch pushes, not PRs
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/sbom')
     
     permissions:
       contents: write

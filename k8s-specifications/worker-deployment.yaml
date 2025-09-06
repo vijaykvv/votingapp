@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         - name: imagesecret
       containers:
-      - image: vijaykvv/votingapp_worker:latest-17512448468-21
+      - image: vijaykvv/votingapp_worker:latest-17512772026-22
         name: worker
         imagePullPolicy: Always
         resources:

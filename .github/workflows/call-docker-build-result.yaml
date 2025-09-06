@@ -187,6 +187,7 @@ jobs:
         run: |
           cosign attest --predicate Image-SBOM-Details/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.cyclonedx.json \
             --type cyclonedx \
+            --yes \
             ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
         env:
           COSIGN_EXPERIMENTAL: 1
@@ -195,16 +196,31 @@ jobs:
         run: |
           cosign attest --predicate VEX-Image-Details/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vex.json \
             --type vuln \
+            --yes \
             ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
         env:
           COSIGN_EXPERIMENTAL: 1
       
       - name: Commit and push SBOM and VEX files
         run: |
-          git pull origin ${{ github.ref_name }}
-          git add Image-SBOM-Details/ VEX-Image-Details/
-          git commit -m "Add SBOM and VEX details for votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}" || echo "No changes to commit"
-          git push || (git pull --rebase origin ${{ github.ref_name }} && git push)
+          # Retry logic for git push with proper conflict resolution
+          for i in {1..5}; do
+            git pull origin ${{ github.ref_name }} || true
+            git add Image-SBOM-Details/ VEX-Image-Details/
+            if git commit -m "Add SBOM and VEX details for votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}"; then
+              if git push origin ${{ github.ref_name }}; then
+                echo "Successfully pushed on attempt $i"
+                break
+              else
+                echo "Push failed on attempt $i, retrying..."
+                git pull --rebase origin ${{ github.ref_name }} || true
+                sleep $((i * 2))
+              fi
+            else
+              echo "No changes to commit"
+              break
+            fi
+          done
 
   update-manifests:
     needs: call-docker-build
@@ -245,8 +261,21 @@ jobs:
           
       - name: Commit and push changes
         run: |
-          git add k8s-specifications/result-deployment.yaml
-          git commit -m "Update result image to ${{ steps.generate-tag.outputs.IMAGE_TAG }}"
-          
-          # Try to push, and if it fails, pull and push again
-          git push || (git pull --rebase origin main && git push)
+          # Retry logic for git push with proper conflict resolution
+          for i in {1..5}; do
+            git pull origin ${{ github.ref_name }} || true
+            git add k8s-specifications/result-deployment.yaml
+            if git commit -m "Update result image to ${{ steps.generate-tag.outputs.IMAGE_TAG }}"; then
+              if git push origin ${{ github.ref_name }}; then
+                echo "Successfully pushed manifest update on attempt $i"
+                break
+              else
+                echo "Manifest push failed on attempt $i, retrying..."
+                git pull --rebase origin ${{ github.ref_name }} || true
+                sleep $((i * 2))
+              fi
+            else
+              echo "No manifest changes to commit"
+              break
+            fi
+          done

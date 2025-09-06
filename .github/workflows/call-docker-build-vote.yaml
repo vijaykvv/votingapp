@@ -148,7 +148,7 @@ jobs:
       - name: Generate SBOM with Syft
         run: |
           mkdir -p Image-SBOM-Details
-          syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o spdx-json > Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.spdx.json
+          syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o cyclonedx-json > Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.cyclonedx.json
           syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o table > Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.txt
       
       - name: Generate VEX document
@@ -185,8 +185,8 @@ jobs:
       
       - name: Attest SBOM to image
         run: |
-          cosign attest --predicate Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.spdx.json \
-            --type spdxjson \
+          cosign attest --predicate Image-SBOM-Details/votingapp_vote-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.cyclonedx.json \
+            --type cyclonedx \
             ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}
         env:
           COSIGN_EXPERIMENTAL: 1

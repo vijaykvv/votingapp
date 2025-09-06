@@ -27,7 +27,7 @@ All workflows now trigger on both `main` and `sbom` branches for:
 
 ### Syft
 - Software Bill of Materials (SBOM) generator
-- Creates SPDX-JSON format SBOMs
+- Creates CycloneDX-JSON format SBOMs
 - Catalogs all packages and dependencies in images
 
 ### VEXctl
@@ -44,7 +44,7 @@ All workflows now trigger on both `main` and `sbom` branches for:
 
 ### SBOM Files
 Stored in `Image-SBOM-Details/` directory:
-- `{imagename}-{tag}-sbom.spdx.json` - SPDX JSON format
+- `{imagename}-{tag}-sbom.cyclonedx.json` - CycloneDX JSON format
 - `{imagename}-{tag}-sbom.txt` - Human readable table format
 
 ### VEX Files  
@@ -68,12 +68,12 @@ The workflows generate unique tags for each build:
 ## Attestation
 
 Each image gets the following attestations:
-- **SBOM Attestation** (type: spdxjson)
+- **SBOM Attestation** (type: cyclonedx)
 - **VEX Attestation** (type: vuln)
 
 Attestations are stored with the image in the registry and can be verified using:
 ```bash
-cosign verify-attestation --type spdxjson {image}
+cosign verify-attestation --type cyclonedx {image}
 cosign verify-attestation --type vuln {image}
 ```
 
@@ -106,7 +106,7 @@ Security scanning runs automatically on every push to `main` or `sbom` branches.
 
 To verify an image's SBOM:
 ```bash
-cosign verify-attestation --type spdxjson vijaykvv/votingapp_vote:latest-{run_id}-{run_number}
+cosign verify-attestation --type cyclonedx vijaykvv/votingapp_vote:latest-{run_id}-{run_number}
 ```
 
 To verify an image's VEX document:

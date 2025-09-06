@@ -393,60 +393,6 @@ jobs:
             fi
           done
 
-  verify-attestations:
-    needs: security-scan
-    runs-on: ubuntu-latest
-    # Only run on main and sbom branch pushes, not PRs
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/sbom')
-    
-    steps:
-      - name: Generate timestamp tag
-        id: generate-tag
-        run: echo "IMAGE_TAG=latest-${{ github.run_id }}-${{ github.run_number }}" >> $GITHUB_OUTPUT
-        
-      - name: Set image name
-        id: image-name
-        run: echo "FULL_IMAGE_NAME=vijaykvv/votingapp_result:${{ steps.generate-tag.outputs.IMAGE_TAG }}" >> $GITHUB_OUTPUT
-      
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@v3
-        with:
-          cosign-release: 'v2.2.4'
-      
-      - name: Verify SBOM Attestation (Fast)
-        run: |
-          echo "🔍 Verifying CycloneDX SBOM Attestation..."
-          timeout 120s cosign verify-attestation --type cyclonedx \
-            --certificate-identity-regexp ".*github.*" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --insecure-ignore-tlog \
-            ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} || echo "⚠️ SBOM verification timed out (this is normal)"
-          echo "✅ SBOM Attestation verification completed!"
-        env:
-          COSIGN_EXPERIMENTAL: 1
-      
-      - name: Verify VEX Attestation (Fast)
-        run: |
-          echo "🔍 Verifying VEX Attestation..."
-          timeout 120s cosign verify-attestation --type vuln \
-            --certificate-identity-regexp ".*github.*" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --insecure-ignore-tlog \
-            ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} || echo "⚠️ VEX verification timed out (this is normal)"
-          echo "✅ VEX Attestation verification completed!"
-        env:
-          COSIGN_EXPERIMENTAL: 1
-      
-      - name: Print Manual Verification Commands
-        run: |
-          echo "📋 Manual Verification Commands:"
-          echo ""
-          echo "# Verify SBOM Attestation:"
-          echo "cosign verify-attestation --type cyclonedx --certificate-identity-regexp \".*github.*\" --certificate-oidc-issuer https://token.actions.githubusercontent.com ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}"
-          echo ""
-          echo "# Verify VEX Attestation:"
-          echo "cosign verify-attestation --type vuln --certificate-identity-regexp \".*github.*\" --certificate-oidc-issuer https://token.actions.githubusercontent.com ${{ steps.image-name.outputs.FULL_IMAGE_NAME }}"
-
   update-manifests:
     needs: call-docker-build
     runs-on: ubuntu-latest

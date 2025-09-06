@@ -30,7 +30,7 @@ spec:
       imagePullSecrets:
         - name: imagesecret
       containers:
-      - image: vijaykvv/votingapp_result:latest-17512448465-45
+      - image: vijaykvv/votingapp_result:latest-17512772024-46
         name: result
         imagePullPolicy: Always
         ports:

@@ -59,9 +59,9 @@ jobs:
       ### https://github.com/docker/metadata-action#tags-input
       ### defaults to:
       tag-rules: |
-        type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
-        type=raw,value=latest-${{ github.run_id }}-${{ github.run_number }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
-        type=raw,value=${{ github.sha }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) || github.ref == 'refs/heads/sbom' }}
+        type=raw,value=latest-${{ github.run_id }}-${{ github.run_number }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) || github.ref == 'refs/heads/sbom' }}
+        type=raw,value=${{ github.sha }},enable=${{ endsWith(github.ref, github.event.repository.default_branch) || github.ref == 'refs/heads/sbom' }}
         type=ref,event=pr
       
       ### path to where docker should copy files into image

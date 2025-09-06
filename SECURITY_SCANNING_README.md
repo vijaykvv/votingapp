@@ -42,6 +42,8 @@ All workflows now trigger on both `main` and `sbom` branches for:
 
 ## Outputs and Storage
 
+All security artifacts are automatically committed to the repository for complete traceability and compliance.
+
 ### SBOM Files
 Stored in `Image-SBOM-Details/` directory:
 - `{imagename}-{tag}-sbom.cyclonedx.json` - CycloneDX JSON format
@@ -52,9 +54,9 @@ Stored in `VEX-Image-Details/` directory:
 - `{imagename}-{tag}-vex.json` - OpenVEX JSON format
 
 ### Vulnerability Reports
-Stored in `grype-reports/` directory:
-- `{imagename}-{tag}-vulnerabilities.json` - JSON format
-- `{imagename}-{tag}-vulnerabilities.txt` - Human readable format
+Stored in `grype-reports/` directory (✅ **Now committed to repository**):
+- `{imagename}-{tag}-vulnerabilities.json` - JSON format with detailed vulnerability data
+- `{imagename}-{tag}-vulnerabilities.txt` - Human readable table format
 
 ## Image Names and Tags
 
@@ -94,11 +96,12 @@ The workflows require the following GitHub secrets:
 
 ## Security Benefits
 
-- **Vulnerability Visibility** - Early detection of security issues
-- **Supply Chain Security** - Complete software bill of materials
-- **Compliance** - VEX documents for vulnerability disclosure
-- **Traceability** - Cryptographic attestation of security artifacts
-- **Automated** - No manual intervention required
+- **Vulnerability Visibility** - Early detection of security issues with detailed Grype reports
+- **Supply Chain Security** - Complete software bill of materials in CycloneDX format
+- **Compliance** - VEX documents for vulnerability disclosure and audit trails
+- **Traceability** - All security artifacts committed to repository with cryptographic attestation
+- **Historical Tracking** - Complete vulnerability and SBOM history per image tag
+- **Automated** - No manual intervention required, full CI/CD integration
 
 ## Usage
 

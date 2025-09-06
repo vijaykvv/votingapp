@@ -201,13 +201,13 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: 1
       
-      - name: Commit and push SBOM and VEX files
+      - name: Commit and push security artifacts (SBOM, VEX, Grype reports)
         run: |
           # Retry logic for git push with proper conflict resolution
           for i in {1..5}; do
             git pull origin ${{ github.ref_name }} || true
-            git add Image-SBOM-Details/ VEX-Image-Details/
-            if git commit -m "Add SBOM and VEX details for votingapp_worker:${{ steps.generate-tag.outputs.IMAGE_TAG }}"; then
+            git add Image-SBOM-Details/ VEX-Image-Details/ grype-reports/
+            if git commit -m "Add SBOM, VEX, and vulnerability reports for votingapp_worker:${{ steps.generate-tag.outputs.IMAGE_TAG }}"; then
               if git push origin ${{ github.ref_name }}; then
                 echo "Successfully pushed on attempt $i"
                 break

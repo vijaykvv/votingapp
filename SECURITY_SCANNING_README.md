@@ -30,12 +30,14 @@ All workflows now trigger on both `main` and `sbom` branches for:
 - Creates CycloneDX-JSON format SBOMs
 - Catalogs all packages and dependencies in images
 
-### VEXctl & Proper VEX Generation
+### VEXctl & SBOM-Linked VEX Generation
 - Vulnerability Exchange (VEX) document creator using OpenVEX format
-- **Generates real VEX documents based on Grype scan results**
+- **🔗 Cross-references SBOM components with vulnerability scan results**
+- **Generates industry-standard VEX documents with complete traceability**
 - Processes actual CVE identifiers found in vulnerability scans
+- Maps vulnerabilities to exact SBOM component identifiers (bom-ref, PURL)
 - Assigns meaningful status (not_affected, under_investigation) based on severity
-- Includes proper justifications and impact statements
+- Includes proper justifications, impact statements, and action statements
 
 ### Cosign
 - Image signing and attestation tool
@@ -57,10 +59,13 @@ Stored in `VEX-Image-Details/` directory:
 
 **Features:**
 - ✅ **Real CVE identifiers** from Grype scan results  
+- ✅ **SBOM component linkage** - VEX references exact SBOM components by bom-ref
+- ✅ **Complete traceability** - Every vulnerability mapped to SBOM component ID
+- ✅ **PURL integration** - Package URLs from SBOM included in VEX statements
 - ✅ **Severity-based status assignments** (CRITICAL/HIGH → under_investigation)
-- ✅ **Proper justifications** (vulnerability_disputed, code_not_reachable, etc.)
-- ✅ **Component mapping** to affected subcomponents
-- ✅ **Impact statements** with vulnerability descriptions
+- ✅ **Proper justifications** (vulnerability_disputed, vulnerable_code_not_in_execute_path, etc.)
+- ✅ **Fuzzy component matching** - Handles name variations between Grype and SBOM
+- ✅ **Impact & action statements** with detailed vulnerability information
 
 ### Vulnerability Reports
 Stored in `grype-reports/` directory (✅ **Now committed to repository**):

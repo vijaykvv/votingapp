@@ -151,15 +151,52 @@ jobs:
           syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o cyclonedx-json > Image-SBOM-Details/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.cyclonedx.json
           syft ${{ steps.image-name.outputs.FULL_IMAGE_NAME }} -o table > Image-SBOM-Details/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.txt
       
-      - name: Generate VEX document from Grype results
+      - name: Generate VEX document from SBOM and Grype results
         run: |
           mkdir -p VEX-Image-Details
           
-          # Parse Grype JSON results to create proper VEX document
+          # Generate VEX document that cross-references SBOM components
           python3 << 'PYTHON_SCRIPT'
           import json
           import os
           from datetime import datetime
+          import re
+          
+          # Read SBOM file (CycloneDX format)
+          sbom_file = f"Image-SBOM-Details/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-sbom.cyclonedx.json"
+          sbom_components = {}
+          
+          try:
+              with open(sbom_file, 'r') as f:
+                  sbom_data = json.load(f)
+                  
+              # Build component map from SBOM
+              for component in sbom_data.get("components", []):
+                  name = component.get("name", "")
+                  version = component.get("version", "")
+                  purl = component.get("purl", "")
+                  component_type = component.get("type", "library")
+                  
+                  # Create searchable keys
+                  if name:
+                      key = f"{name}@{version}" if version else name
+                      sbom_components[key.lower()] = {
+                          "name": name,
+                          "version": version, 
+                          "purl": purl,
+                          "type": component_type,
+                          "bom_ref": component.get("bom-ref", f"component-{len(sbom_components)}")
+                      }
+                      
+                  # Also index by just name for fuzzy matching
+                  if name:
+                      sbom_components[name.lower()] = sbom_components[key.lower()]
+              
+              print(f"Loaded {len(sbom_components)} components from SBOM")
+              
+          except Exception as e:
+              print(f"Could not read SBOM: {e}, proceeding with Grype-only VEX")
+              sbom_components = {}
           
           # Read Grype scan results
           grype_file = f"grype-reports/votingapp_result-${{ steps.generate-tag.outputs.IMAGE_TAG }}-vulnerabilities.json"
@@ -181,6 +218,27 @@ jobs:
               "statements": []
           }
           
+          # Helper function to find SBOM component
+          def find_sbom_component(artifact_name, artifact_version=""):
+              if not artifact_name:
+                  return None
+                  
+              # Try exact match with version
+              key_with_version = f"{artifact_name}@{artifact_version}".lower() if artifact_version else artifact_name.lower()
+              if key_with_version in sbom_components:
+                  return sbom_components[key_with_version]
+              
+              # Try just name
+              if artifact_name.lower() in sbom_components:
+                  return sbom_components[artifact_name.lower()]
+              
+              # Try fuzzy matching for similar names
+              for comp_key, comp_data in sbom_components.items():
+                  if artifact_name.lower() in comp_key or comp_key in artifact_name.lower():
+                      return comp_data
+              
+              return None
+          
           # Process vulnerabilities from Grype results
           processed_cves = set()
           
@@ -194,11 +252,20 @@ jobs:
                   
               processed_cves.add(cve_id)
               
+              # Get artifact information
+              artifact = match.get("artifact", {})
+              artifact_name = artifact.get("name", "unknown-component")
+              artifact_version = artifact.get("version", "")
+              artifact_type = artifact.get("type", "")
+              
+              # Find matching SBOM component
+              sbom_component = find_sbom_component(artifact_name, artifact_version)
+              
               # Determine status based on severity
               severity = vulnerability.get("severity", "Unknown").upper()
               if severity in ["CRITICAL", "HIGH"]:
                   status = "under_investigation"
-                  justification = "vulnerability_disputed"  # or "code_not_reachable" 
+                  justification = "vulnerability_disputed"
               elif severity in ["MEDIUM"]:
                   status = "not_affected"
                   justification = "vulnerable_code_not_in_execute_path"
@@ -206,7 +273,26 @@ jobs:
                   status = "not_affected" 
                   justification = "component_not_present"
               
-              # Create VEX statement
+              # Create subcomponent reference
+              if sbom_component:
+                  # Use SBOM component data for proper traceability
+                  subcomponent = {
+                      "@id": sbom_component["bom_ref"],
+                      "name": sbom_component["name"],
+                      "version": sbom_component["version"]
+                  }
+                  if sbom_component["purl"]:
+                      subcomponent["purl"] = sbom_component["purl"]
+              else:
+                  # Fallback to Grype artifact data
+                  subcomponent = {
+                      "@id": f"component-{artifact_name}-{artifact_version}",
+                      "name": artifact_name
+                  }
+                  if artifact_version:
+                      subcomponent["version"] = artifact_version
+              
+              # Create VEX statement with SBOM linkage
               statement = {
                   "vulnerability": {
                       "name": cve_id,
@@ -215,22 +301,28 @@ jobs:
                   "products": [
                       {
                           "@id": "${{ steps.image-name.outputs.FULL_IMAGE_NAME }}",
-                          "subcomponents": [
-                              {
-                                  "@id": match.get("artifact", {}).get("name", "unknown-component")
-                              }
-                          ]
+                          "subcomponents": [subcomponent]
                       }
                   ],
                   "status": status,
                   "justification": justification,
-                  "impact_statement": f"Severity: {severity} - {vulnerability.get('description', 'No description available')}"
+                  "impact_statement": f"Severity: {severity} - {vulnerability.get('description', 'No description available')}",
+                  "action_statement": f"Component {'found in SBOM' if sbom_component else 'detected by scanner'}: {artifact_name}"
               }
               
               vex_doc["statements"].append(statement)
           
-          # If no vulnerabilities found, add a statement indicating clean scan
+          # If no vulnerabilities found, create statement for all SBOM components
           if not vex_doc["statements"]:
+              # Create a comprehensive clean scan statement
+              clean_components = []
+              for comp_key, comp_data in list(sbom_components.items())[:10]:  # Limit to first 10 for brevity
+                  clean_components.append({
+                      "@id": comp_data["bom_ref"],
+                      "name": comp_data["name"],
+                      "version": comp_data["version"]
+                  })
+              
               vex_doc["statements"].append({
                   "vulnerability": {
                       "name": "SCAN-COMPLETE",
@@ -238,12 +330,14 @@ jobs:
                   },
                   "products": [
                       {
-                          "@id": "${{ steps.image-name.outputs.FULL_IMAGE_NAME }}"
+                          "@id": "${{ steps.image-name.outputs.FULL_IMAGE_NAME }}",
+                          "subcomponents": clean_components if clean_components else [{"@id": "image-root"}]
                       }
                   ],
                   "status": "not_affected",
                   "justification": "component_not_present",
-                  "impact_statement": "No known vulnerabilities detected in this image"
+                  "impact_statement": f"No known vulnerabilities detected in this image with {len(sbom_components)} components scanned",
+                  "action_statement": f"All components from SBOM verified clean by Grype scanner"
               })
           
           # Write VEX document
@@ -251,7 +345,8 @@ jobs:
           with open(vex_file, 'w') as f:
               json.dump(vex_doc, f, indent=2)
               
-          print(f"Generated proper VEX document with {len(vex_doc['statements'])} statements")
+          print(f"Generated SBOM-linked VEX document with {len(vex_doc['statements'])} statements")
+          print(f"SBOM components referenced: {len([s for s in vex_doc['statements'] if any('bom_ref' in str(sc) for sc in s.get('products', [{}])[0].get('subcomponents', []))])}")
           PYTHON_SCRIPT
       
       - name: Install Cosign

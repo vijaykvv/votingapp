@@ -1,6 +1,6 @@
 name: Build Vote
 # template source: https://github.com/dockersamples/.github/blob/main/templates/call-docker-build.yaml
-
+# added grype, syft, vexctl by vijaykvv on 07-Sep-2025
 on:
   # we want pull requests so we can build(test) but not push to image registry
   push:
